@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,16 +9,26 @@
         {{title}}
         {% endblock %}
     </title>
+    {% load static %}
     <script src="https://cdn.tailwindcss.com"></script>
+  <script src="{% static 'js/script.js'%}" ></script>
+  <link rel="stylesheet" href="{% static 'css/styles.css'%}"/>
 </head>
+
 <body>
     <h1 class="p-4 bg-green-500 text-center text-xl font-semibold text-white">Myapp home page</h1>
-    <a href="/myapp/home">Home</a>
-    <a href="/myapp/about">About</a>
-    <a href="/myapp/profile">Profile</a>
-  <div>
-    {%block content%}
-    {%endblock%}
-  </div>
+    <div class="ml-10">
+        <b> <a href="/myapp/home">Home</a></b>
+        <b><a href="/myapp/about">About</a></b>
+        <b> <a href="/myapp/profile">Profile</a></b>
+        
+        <div class="mt-2 ">
+            {%block content%}
+            <b>This is home page content</b>
+            {%endblock%}
+        </div>
+    </div>
+
 </body>
+
 </html>
