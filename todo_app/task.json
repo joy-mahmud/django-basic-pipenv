@@ -1,0 +1,31 @@
+[ {
+    "model":"todo_app.task",
+    "pk":1,
+    "fields":{
+       "title":"task one",
+       "description":"this is the description one",
+       "created_at":"2024-02-03 12:00:00",
+       "completed":true
+       }
+   },
+   {
+    "model":"todo_app.task",
+    "pk":2,
+    "fields":{
+       "title":"task two",
+       "description":"this is the description two",
+       "created_at":"2024-02-03 12:00:00",
+       "completed":false
+       }
+   },
+   {
+    "model":"todo_app.task",
+    "pk":3,
+    "fields":{
+       "title":"task three",
+       "description":"this is the description three",
+       "created_at":"2024-02-03 12:00:00",
+       "completed":false
+       }
+   }
+]
