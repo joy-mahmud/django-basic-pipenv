@@ -1,0 +1,7 @@
+{% extends "base.html"%}
+
+{% block task%}
+    {% for task in tasks%}
+    <h3>{{task.title}}</h3>
+    {%endfor%}
+{%endblock%}
