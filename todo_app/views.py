@@ -3,4 +3,7 @@ from .models import Task
 def TaskView(request):
     tasks = Task.objects.all()
     return render(request,'task_list.html',{"tasks":tasks})
-# Create your views here.
+
+def task_details(req,id):
+    task = Task.objects.get(pk=id)
+    return render(req,'task_details.html',{"task":task})

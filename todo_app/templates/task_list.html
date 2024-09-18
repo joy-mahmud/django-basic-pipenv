@@ -2,6 +2,6 @@
 
 {% block task%}
     {% for task in tasks%}
-    <h3>{{task.title}}</h3>
+    <h3><a href="{% url 'task_details' task.id%}">{{task.title}}</a></h3>
     {%endfor%}
 {%endblock%}

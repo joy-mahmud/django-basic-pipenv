@@ -5,4 +5,5 @@ urlpatterns =[
     path('home/',views.myappHome),
     path('about/',views.about),
     path('profile/',views.profile),
+    
     ]
