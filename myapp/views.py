@@ -26,6 +26,15 @@ def insert_data(request):
     return HttpResponse("Data inserted successfully")
 
 def display_books(request):
-    books = Book.objects.all().values()
+    #books = Book.objects.all().values()
+    books= [{'id': 1, 'title': 'harry potter', 'author': 'jk rowling'},{"title":"double standard",
+        "author":"shakti",}]
     print(books)
     return render(request,"allBooks.html",context={"allBooks":books})
+
+def update_book(request):
+    book=Book.objects.all()[2]
+    book.author="shamsul arefin shakti"
+    book.save()
+    
+    return HttpResponse(f"data updated successfully")
