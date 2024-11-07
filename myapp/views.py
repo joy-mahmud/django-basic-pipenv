@@ -14,7 +14,7 @@ def profile(request):
      return render(request,'profile.html',{'title':'profile','social':social})
  
 #inserting data to database:
-def insert_data(request):
+def add_book(request):
     book = Book(
         title="double standard",
         author="shakti",
@@ -36,5 +36,9 @@ def update_book(request):
     book=Book.objects.all()[2]
     book.author="shamsul arefin shakti"
     book.save()
+
+def delete_book(request):
+    book = Book.objects.all()[2]
+    book.delete()
     
-    return HttpResponse(f"data updated successfully")
+    return HttpResponse(f"book is deleted successfully")
