@@ -5,15 +5,52 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://cdn.tailwindcss.com"></script>
       </head>
-<body>
+<body class=''>
 
-<h1 class="text-center bg-green-400 text-white text-4xl font-semibold py-5">Members</h1>
+<h1  class="text-center bg-green-400 text-white text-4xl font-semibold py-5">Members</h1>
   
-<ul>
-  {% for x in mymembers %}
-    <li>{{ x.firstname }} {{ x.lastname }}</li>
-  {% endfor %}
-</ul>
+<div>
+    <div class="p-2 flex gap-5">
+        <button onclick="viewMembers()" class="p-2 rounded-lg bg-green-500">Show all members</button>
+        <button onclick="hideMembers()" class="p-2 rounded-lg bg-green-500">Hide members</button>
+    </div>
+    {% comment %} <ul>
+        {% for x in mymembers %}
+          <li>{{ x.firstname }} {{ x.lastname }}</li>
+        {% endfor %}
+      </ul> {% endcomment %}
+
+    <ul id="memberList" class="p-2">
+
+    </ul>
+ 
+</div>
+
+<script>
+    function viewMembers (){
+        fetch('http://127.0.0.1:8000/member/viewMembers/')
+            .then(res=>res.json())
+            .then(data=>{
+                const memberList= document.getElementById('memberList')
+                memberList.innerHTML = "";
+
+                data.members.forEach(member=>{
+                    const listItem = document.createElement('li')
+                    listItem.textContent=`${member.firstname} ${member.lastname}`
+                    listItem.className="py-1 mb-2 px-2 bg-red-300 rounded-lg w-1/4"
+                    memberList.appendChild(listItem)
+                })
+                console.log(data.members)
+            })
+
+            .catch(error=>console.log(error))
+    }
+
+    function hideMembers(){
+        document.getElementById('memberList').innerHTML="";
+    }
+</script>
+
 
 </body>
 </html>
