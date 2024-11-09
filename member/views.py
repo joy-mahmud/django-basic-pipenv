@@ -21,19 +21,35 @@ def add_member(request):
 def add_member_by_url(request):
     firstname=request.GET.get('firstname')
     lastname=request.GET.get('lastname')
+    verified=request.GET.get('verified')
     
-    if not all([firstname,lastname]):
+    if not all([firstname,lastname,verified]):
         return HttpResponse('missing required parameter')
     
     try:
-        member=Member.objects.create(firstname=firstname,lastname=lastname)
+        member=Member.objects.create(firstname=firstname,lastname=lastname,verified=verified)
         # return HttpResponse(f"member added id:{member.id}")
-        return JsonResponse({'message':'member add','status':200})
+        return JsonResponse({'message':'member add','status':200,'id':member.id})
     except:
         return HttpResponse('something went wrong')
     
 def view_members(request):
     members = list(Member.objects.all().values())
+    verified=request.GET.get('verified')
+    print(type(verified))
+  
+    if(verified=='1'):
+        members=Member.objects.all()
+        verifiedMembers=members.filter(verified=True)
+        memberList=list(verifiedMembers.values())
+        return JsonResponse({"members":memberList})
+    elif(verified=='0'):
+        members=Member.objects.all()
+        NonVerifiedMembers=members.filter(verified=False)
+        print(NonVerifiedMembers)
+        memberList=list(NonVerifiedMembers.values())
+        return JsonResponse({"members":memberList})
+        #return HttpResponse('non verified')
     return JsonResponse({"members":members})
     
     

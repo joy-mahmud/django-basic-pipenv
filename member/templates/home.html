@@ -1,18 +1,24 @@
 <!DOCTYPE html>
 <html>
     <head>
+        
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {% load static %}
         <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="stylesheet" type="text/css" href="{% static 'memberStatic/css/styles.css' %}">
+        <script src="{% static 'memberStatic/js/script.js' %}"></script>
       </head>
-<body class=''>
+<body>
 
 <h1  class="text-center bg-green-400 text-white text-4xl font-semibold py-5">Members</h1>
   
 <div>
     <div class="p-2 flex gap-5">
         <button onclick="viewMembers()" class="p-2 rounded-lg bg-green-500">Show all members</button>
-        <button onclick="hideMembers()" class="p-2 rounded-lg bg-green-500">Hide members</button>
+        <button onclick="viewMembers(1)" class="p-2 rounded-lg btn">verified members</button>
+        <button onclick="viewMembers(0)" class="p-2 rounded-lg btn">Non verified members</button>
+        <button onclick="hideMembers()" class="p-2 rounded-lg btn">Hide members</button>
     </div>
     {% comment %} <ul>
         {% for x in mymembers %}
@@ -23,12 +29,15 @@
     <ul id="memberList" class="p-2">
 
     </ul>
+    <div>
+        <img width="300" height="200" src="{% static 'images/food1.jpg' %}" alt="" class="h-[300px]">
+    </div>
  
 </div>
 
 <script>
-    function viewMembers (){
-        fetch('http://127.0.0.1:8000/member/viewMembers/')
+    function viewMembers (verified){
+        fetch(`http://127.0.0.1:8000/member/viewMembers/?verified=${verified}`)
             .then(res=>res.json())
             .then(data=>{
                 const memberList= document.getElementById('memberList')
