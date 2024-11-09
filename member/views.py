@@ -15,8 +15,14 @@ def home(request):
     return render(request,'home.html',context)
 
 def add_member(request):
-    member= Member(firstname="joy",lastname='mahmud')
-    member.save()
+    
+    if request.method=="POST":
+        firstname =request.POST.get('firstname')
+        lastname=request.POST.get('lastname')
+        member=Member.objects.create(firstname=firstname,lastname=lastname)
+        return HttpResponse("member added successfully")
+    # member= Member(firstname="joy",lastname='mahmud')
+    # member.save()
     
 def add_member_by_url(request):
     firstname=request.GET.get('firstname')
