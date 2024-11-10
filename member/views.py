@@ -12,7 +12,7 @@ def home(request):
     context={
         'mymembers':mymembers
     }
-    return render(request,'home.html',context)
+    return render(request,'member_home.html',context)
 
 def add_member(request):
     
@@ -23,7 +23,9 @@ def add_member(request):
         return HttpResponse("member added successfully")
     # member= Member(firstname="joy",lastname='mahmud')
     # member.save()
-    
+def add_member_page(request):
+    return render(request,'add_member.html')
+
 def add_member_by_url(request):
     firstname=request.GET.get('firstname')
     lastname=request.GET.get('lastname')
@@ -58,6 +60,13 @@ def view_members(request):
         #return HttpResponse('non verified')
     return JsonResponse({"members":members})
     
+def member_details(request,id):
+    member=Member.objects.get(pk=id)
+    context={
+        'member_details':member
+    }
+    return render(request,'member_details.html',context)
+        
     
     
     
