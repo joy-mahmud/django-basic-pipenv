@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse,JsonResponse
 from member.models import Member
 from django.views.decorators.http import require_http_methods
+from django.db.models import Q
 
 
 
@@ -66,6 +67,28 @@ def member_details(request,id):
         'member_details':member
     }
     return render(request,'member_details.html',context)
+
+def search_member(request):
+    search_term= request.GET.get('query')
+    print(search_term)
+    #all_members=list(Member.objects.all().values())
+    searched_members = Member.objects.filter( Q(firstname__icontains=search_term) | Q(lastname__icontains=search_term)) if search_term else Member.objects.all().values()
+    print(searched_members)
+    # searched_members=[]
+    # for member in all_members:
+    #     if search_term in member["firstname"]:
+    #         searched_members.append(member)
+        
+    members_data = list(searched_members.values())
+   
+    context={
+        "members":searched_members
+    }
+    
+    return render(request,'search_member.html',context)
+        
+    
+    
         
     
     
