@@ -3,6 +3,7 @@ from django.http import HttpResponse,JsonResponse
 from member.models import Member
 from django.views.decorators.http import require_http_methods
 from django.db.models import Q
+from member.forms import MemberSearchForm
 
 
 
@@ -69,11 +70,11 @@ def member_details(request,id):
     return render(request,'member_details.html',context)
 
 def search_member(request):
-    search_term= request.GET.get('query')
+    search_term= request.GET.get('query',"")
     print(search_term)
     #all_members=list(Member.objects.all().values())
     searched_members = Member.objects.filter( Q(firstname__icontains=search_term) | Q(lastname__icontains=search_term)) if search_term else Member.objects.all().values()
-    print(searched_members)
+    #print(searched_members)
     # searched_members=[]
     # for member in all_members:
     #     if search_term in member["firstname"]:
@@ -82,11 +83,30 @@ def search_member(request):
     members_data = list(searched_members.values())
    
     context={
-        "members":searched_members
+        "members":searched_members,
+        
     }
     
     return render(request,'search_member.html',context)
+
+def search_member_django_form(request):
+    django_form = MemberSearchForm(request.GET or None)
+ 
+    if django_form.is_valid():
+        searchTerm=django_form.cleaned_data.get('query')
+          
+        print(django_form.cleaned_data)
+
+        searched_members = Member.objects.filter(
+                Q(firstname__icontains=searchTerm) | Q(lastname__icontains=searchTerm)) if searchTerm else Member.objects.all().values()
         
+        
+    context={
+        "members":searched_members,
+        "django_form":django_form
+    }
+    
+    return render(request,'search_member_djangoForm.html',context=context)
     
     
         

@@ -9,7 +9,7 @@
      
        <div >
         
-        <form method="GET" class="pt-10">
+        <form method="GET" action="{% url 'search_member'%}" class="pt-10">
             <input name="query" type="text" class="border-2 border-slate-400 px-2 rounded-lg">
             <button type="submit" class="ml-2 border border-green-300 rounded-lg px-5">search</button>
         </form>
@@ -21,6 +21,7 @@
                 <li>No members found.</li>
             {% endfor %}
         </ul>
+       
        </div>
     </div>
 {% endblock content %}

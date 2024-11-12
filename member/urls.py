@@ -8,5 +8,6 @@ urlpatterns = [
     path('addMemberByUrl/',views.add_member_by_url),
     path('viewMembers/',views.view_members),
     path('memberDetails/<int:id>',views.member_details),
-    path('searchMember/',views.search_member,name="search_member")
+    path('searchMember/',views.search_member,name="search_member"),
+    path('searchMemberByDjangoForm/',views.search_member_django_form, name="search_member_djnago_form")
 ]
