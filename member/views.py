@@ -1,9 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponse,JsonResponse
 from member.models import Member
 from django.views.decorators.http import require_http_methods
 from django.db.models import Q
 from member.forms import MemberSearchForm
+from member.forms import MemberAddForm
 
 
 
@@ -19,10 +20,16 @@ def home(request):
 def add_member(request):
     
     if request.method=="POST":
-        firstname =request.POST.get('firstname')
-        lastname=request.POST.get('lastname')
-        member=Member.objects.create(firstname=firstname,lastname=lastname)
-        return HttpResponse("member added successfully")
+        form = MemberAddForm(request.POST)
+        form.save()
+        return redirect("add_member_page")
+    else:
+        form=MemberAddForm()
+        return redirect("add_member_page")
+        # firstname =request.POST.get('firstname')
+        # lastname=request.POST.get('lastname')
+        # member=Member.objects.create(firstname=firstname,lastname=lastname)
+        # return HttpResponse("member added successfully")
     # member= Member(firstname="joy",lastname='mahmud')
     # member.save()
 def add_member_page(request):

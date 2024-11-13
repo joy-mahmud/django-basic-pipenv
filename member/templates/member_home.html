@@ -1,46 +1,51 @@
-<!DOCTYPE html>
+{% extends "layout.html" %}
+{% comment %} <!DOCTYPE html>
 <html>
     <head>
         
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         {% load static %}
-        <script src="https://cdn.tailwindcss.com"></script>
+      
         <link rel="stylesheet" type="text/css" href="{% static 'memberStatic/css/styles.css' %}">
         <script src="{% static 'memberStatic/js/script.js' %}"></script>
       </head>
-<body>
+<body> {% endcomment %}
 
+{% block title %}member home{% endblock title %}
+{% block content %}
 <h1  class="text-center bg-green-400 text-white text-4xl font-semibold py-5">Members</h1>
   
 <div>
-    <div class="p-2 flex gap-5">
+    <div class="p-2 flex gap-5 justify-center">
      
         <button onclick="viewMembers()" class="p-2 rounded-lg bg-green-500">Show all members</button>
-        <button onclick="viewMembers(1)" class="p-2 rounded-lg btn">verified members</button>
-        <button onclick="viewMembers(0)" class="p-2 rounded-lg btn">Non verified members</button>
-        <button onclick="hideMembers()" class="p-2 rounded-lg btn">Hide members</button>
+        <button onclick="viewMembers(1)" class="p-2 rounded-lg bg-green-500">verified members</button>
+        <button onclick="viewMembers(0)" class="p-2 rounded-lg bg-green-500">Non verified members</button>
+        {% comment %} <button onclick="hideMembers()" class="p-2 rounded-lg btn">Hide members</button> {% endcomment %}
     </div>
-    <div>
-        <ul>
+    <div class="flex justify-center w-full">
+        <ul class="w-1/4" id="mainMemberList">
             {% for member in mymembers %}
-                <li>{{member.firstname}} {{member.lastname}}</li>
+                <li class="py-1 mb-2 px-2 bg-red-300 rounded-lg w-full">{{member.firstname}} {{member.lastname}}</li>
 
              {% endfor %}
         </ul>
+        
     </div>
-   {% block addMember %}
-   {% endblock addMember %}
-  
-    <ul id="memberList" class="p-2">
+    <div class="flex justify-center w-full">
+        <ul id="memberList"  class="w-1/4">
 
-    </ul>
-    <div>
-        <img width="300" height="200" src="{% static 'memberStatic/images/food1.jpg' %}" alt="" class="h-[300px]">
+        </ul>
     </div>
+  
+  
+   
+    {% comment %} <div>
+        <img width="300" height="200" src="{% static 'memberStatic/images/food1.jpg' %}" alt="" class="h-[300px]">
+    </div> {% endcomment %}
  
 </div>
-
 <script>
     function viewMembers (verified){
         fetch(`http://127.0.0.1:8000/member/viewMembers/?verified=${verified}`)
@@ -55,9 +60,12 @@
                     link.setAttribute('href',`http://127.0.0.1:8000/member/memberDetails/${member.id}`)
                     listItem.appendChild(link)
                     link.textContent=`${member.firstname} ${member.lastname}`
-                    listItem.className="py-1 mb-2 px-2 bg-red-300 rounded-lg w-1/4"
+                    listItem.className="py-1 mb-2 px-2 bg-green-300 rounded-lg"
                     memberList.appendChild(listItem)
+
                 })
+                const mainMemberList= document.getElementById('mainMemberList')
+                mainMemberList.innerHTML="";
                 console.log(data.members)
             })
 
@@ -68,7 +76,9 @@
         document.getElementById('memberList').innerHTML="";
     }
 </script>
+{% endblock content %}
 
 
-</body>
-</html>
+
+
+

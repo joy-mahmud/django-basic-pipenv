@@ -7,9 +7,14 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-    <ul>
+    <ul class="flex gap-5 bg-green-500 px-20 py-5">
+        <li class="text-white border-[2px] border-white rounded-lg px-5"><a href="http://127.0.0.1:8000/member/home/">home</a></li>
+        <li class="text-white border-[2px] border-white rounded-lg px-5"><a href="http://127.0.0.1:8000/member/addMember/">add member</a></li>
+        <li class="text-white border-[2px] border-white rounded-lg px-5"><a href="http://127.0.0.1:8000/member/searchMember/">search members</a></li>
+    </ul>
+ 
         {% block content %}
         {% endblock content %}
-    </ul>
+  
 </body>
 </html>
