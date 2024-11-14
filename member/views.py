@@ -5,7 +5,7 @@ from django.views.decorators.http import require_http_methods
 from django.db.models import Q
 from member.forms import MemberSearchForm
 from member.forms import MemberAddForm
-
+import json
 
 
 # Create your views here.
@@ -21,8 +21,9 @@ def add_member(request):
     
     if request.method=="POST":
         form = MemberAddForm(request.POST)
-        form.save()
-        return redirect("add_member_page")
+        if form.is_valid():
+            form.save()
+            return redirect("add_member_page")
     else:
         form=MemberAddForm()
         return redirect("add_member_page")
@@ -114,9 +115,35 @@ def search_member_django_form(request):
     }
     
     return render(request,'search_member_djangoForm.html',context=context)
-    
-    
+
+
+def update_member_page(request,id):
+    member=Member.objects.get(id=id)
+    context={
+        'member':member
+    }
+    return render(request,'update_member.html',context)
         
+def update_member(request,id):
+    try:
+        if request.method=="PUT":
+            data=json.loads(request.body)
+            firstname=data.get('firstname')
+            lastname=data.get('lastname')
+                       
+            member= Member.objects.get(id=id)
+            member.firstname=firstname
+            member.lastname=lastname
+            member.save()
+            return JsonResponse({"status": "success", "message": "Member updated successfully"})
+        
+    except:
+        return JsonResponse({"status": "failed", "message": "something went wrong"})
+         
+    
+         
+         
+            
     
     
     

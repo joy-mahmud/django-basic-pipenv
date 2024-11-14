@@ -27,7 +27,9 @@
     <div class="flex justify-center w-full">
         <ul class="w-1/4" id="mainMemberList">
             {% for member in mymembers %}
-                <li class="py-1 mb-2 px-2 bg-red-300 rounded-lg w-full">{{member.firstname}} {{member.lastname}}</li>
+                <li class="py-1 mb-2 px-2 bg-red-300 rounded-lg w-full">
+                    <a href="http://127.0.0.1:8000/member/memberDetails/{{member.id}}">{{member.firstname}} {{member.lastname}}</a>
+                </li>
 
              {% endfor %}
         </ul>
