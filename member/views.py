@@ -139,6 +139,11 @@ def update_member(request,id):
         
     except:
         return JsonResponse({"status": "failed", "message": "something went wrong"})
+    
+def deleteMember(request,id):
+    member=Member.objects.get(id=id)
+    member.delete()
+    return redirect('member_home')
          
     
          
