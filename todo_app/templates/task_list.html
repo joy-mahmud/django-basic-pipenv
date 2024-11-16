@@ -1,7 +1,7 @@
 {% extends "base.html"%}
 
-{% block task%}
+{% block content%}
     {% for task in tasks%}
-    <h3><a href="{% url 'task_details' task.id%}">{{task.title}}</a></h3>
+    <h3><a href="{% url 'task_details' task.id%}">{{task.title}}</a></h3> <a href="{% url 'update_task' task.id %}"><button>update</button></a>
     {%endfor%}
-{%endblock%}
+{%endblock content%}
