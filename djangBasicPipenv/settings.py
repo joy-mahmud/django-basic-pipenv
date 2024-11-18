@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'myapp',
     'todo_app',
-    'member'
+    'member',
+    'library-management'
 ]
 
 MIDDLEWARE = [
