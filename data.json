@@ -1,0 +1,71 @@
+[
+    {
+        "model": "library_management.author",
+        "pk": 1,
+        "fields": {
+            "name": "Author One",
+            "email": "author1@example.com"
+        }
+    },
+    {
+        "model": "library_management.author",
+        "pk": 2,
+        "fields": {
+            "name": "Author Two",
+            "email": "author2@example.com"
+        }
+    },
+    {
+        "model": "library_management.author",
+        "pk": 3,
+        "fields": {
+            "name": "Author Three",
+            "email": "author3@example.com"
+        }
+    },
+    {
+        "model": "library_management.book",
+        "pk": 1,
+        "fields": {
+            "title": "Book One",
+            "author": 1,
+            "published_date": "2024-01-01"
+        }
+    },
+    {
+        "model": "library_management.book",
+        "pk": 2,
+        "fields": {
+            "title": "Book Two",
+            "author": 2,
+            "published_date": "2024-02-01"
+        }
+    },
+    {
+        "model": "library_management.book",
+        "pk": 3,
+        "fields": {
+            "title": "Book Three",
+            "author": 1,
+            "published_date": "2024-03-01"
+        }
+    },
+    {
+        "model": "library_management.book",
+        "pk": 4,
+        "fields": {
+            "title": "Book Four",
+            "author": 3,
+            "published_date": "2024-04-01"
+        }
+    },
+    {
+        "model": "library_management.book",
+        "pk": 5,
+        "fields": {
+            "title": "Book Five",
+            "author": 2,
+            "published_date": "2024-05-01"
+        }
+    }
+]

@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'myapp',
     'todo_app',
     'member',
-    'library-management'
+    'library_management'
+
 ]
 
 MIDDLEWARE = [
