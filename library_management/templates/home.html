@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block title %}library-home{% endblock title %}
+{% block content %}
+    <div class="p-5">
+        <h2>
+            Authors:
+        </h2>
+        <ol>
+            {% for x in authors  %}
+                <li class="mb-2">{{x.name}} <a href="{% url 'addProfile' x.id %}"><button type="button" class="bg-green-300 rounded-lg px-4">add profile</button></a></li>
+            {% endfor %}
+        </ol>
+    </div>
+{% endblock content %}

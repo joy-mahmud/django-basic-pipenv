@@ -1,10 +1,36 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect,get_object_or_404
 from django.http import HttpResponse,JsonResponse
-from .models import Author,Book
+from .models import Author,Book,Profile
+from .forms import ProfileForm
 
 # Create your views here.
 def home(request):
-    return HttpResponse('library')
+    authors=Author.objects.all()
+    context={
+        "authors":authors
+    }
+    
+    return render(request,'home.html',context)
+
+def addProfile(request,id):
+    #author= Author.objects.get(id=id)
+    author = get_object_or_404(Author, id=id)
+    
+    if request.method=="POST":
+        profileForm=ProfileForm(request.POST)
+        if profileForm.is_valid():
+            profile =profileForm.save(commit=False)
+            profile.author=author
+            profile.save()
+            return redirect('library_home')
+    
+    form=ProfileForm(instance=author)
+    context={
+        "form":form
+    } 
+    return render(request,'addProfile.html',context=context)  
+    
+   
 
 def testing(request):
     def testingOne():
@@ -60,6 +86,17 @@ def testing(request):
             )
         return JsonResponse(author_books,safe=False)
     
-    return testingTwo()
+    #return testingTwo()
+    
+    def testProfile():
+        author=Author.objects.create(name="Author Four",email='author4@gmail.com')
+        profile =Profile.objects.create(
+            author=author,
+            bio="Author Four has written many bestsellers.",
+            website="https://authorfour.com",
+            birthDate='1998-01-15'
+        )
+        return HttpResponse('profile created for the auhtor Four')
+    return testProfile()
     #return HttpResponse('testing two')
     
