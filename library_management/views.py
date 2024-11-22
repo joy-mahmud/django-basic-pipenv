@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect,get_object_or_404
 from django.http import HttpResponse,JsonResponse
 from .models import Author,Book,Profile
 from .forms import ProfileForm
-
+from django.forms.models import model_to_dict
 # Create your views here.
 def home(request):
     authors=Author.objects.all()
@@ -54,6 +54,8 @@ def testing(request):
                     'published':book.published_date
                 }
                 booksOfAnAuthor.append(book_data)
+                # book_dict=model_to_dict(book)
+                # booksOfAnAuthor.append(book_dict)
             
             author_books.append(
                 {

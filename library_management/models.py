@@ -21,7 +21,7 @@ class Book(models.Model):
 
 
 class Profile(models.Model):
-    author= models.OneToOneField(Author,on_delete=models.CASCADE,related_name='profile')
+    author= models.OneToOneField(Author,on_delete=models.CASCADE,related_name='profile') #if there is no related name defined then we can access by modelname_set , in this case profile_set
     bio=models.TextField()
     website=models.URLField(blank=True,null=True)
     birthDate=models.DateField(blank=True,null=True)
