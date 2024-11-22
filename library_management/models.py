@@ -12,7 +12,8 @@ class Author(models.Model):
 # Book model (many-to-many with Genre, one-to-many with Author)
 class Book(models.Model):
     title = models.CharField(max_length=200)
-    author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name='books')  # Many-to-one
+    #author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name='books')  # Many-to-one
+    authors = models.ManyToManyField(Author, related_name='books')
     published_date = models.DateField()
 
     def __str__(self):
@@ -27,3 +28,5 @@ class Profile(models.Model):
     
     def __str__(self) -> str:
         return f"profile of {self.author.name}"
+    
+

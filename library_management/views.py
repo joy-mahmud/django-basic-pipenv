@@ -20,7 +20,7 @@ def addProfile(request,id):
         profileForm=ProfileForm(request.POST)
         if profileForm.is_valid():
             profile =profileForm.save(commit=False)
-            profile.author=author
+            # profile.author=author
             profile.save()
             return redirect('library_home')
     
@@ -88,6 +88,40 @@ def testing(request):
     
     #return testingTwo()
     
+    def testingThree():
+        author1 = Author.objects.get(id=1)
+        author2 = Author.objects.get(id=2)
+
+        # Assuming 'authors' is a ManyToManyField in the Book model
+        book = Book.objects.get(id=1)
+        book.authors.add(author1, author2)
+
+        # Get all authors of the book
+        authors = []
+        for author in book.authors.all():
+            authors.append(
+                {
+                    "name": author.name,
+                    "website": author.profile.website if hasattr(author, 'profile') else None,
+                    "bio": author.profile.bio if hasattr(author, 'profile') else None,
+                }
+            )
+
+        # Get all books of an author
+        # books = []
+        # for book in author1.books.all():
+        #     books.append({
+        #         "title": book.title,
+        #         "published": book.published_date
+        #     })
+        books=[{"title":book.title,"published":book.published_date} for book in author1.books.all()]
+        
+
+        return JsonResponse({"authors": authors, "books": books})
+    return testingThree()
+
+    
+    
     def testProfile():
         author=Author.objects.create(name="Author Four",email='author4@gmail.com')
         profile =Profile.objects.create(
@@ -97,6 +131,8 @@ def testing(request):
             birthDate='1998-01-15'
         )
         return HttpResponse('profile created for the auhtor Four')
-    return testProfile()
+   # return testProfile()
     #return HttpResponse('testing two')
+    
+    
     
