@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block title %}register{% endblock title %}
+
+{% block content %}
+<div>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{form}}
+        <button type="submit">register</button>
+    </form>
+</div>
+{% endblock content %}

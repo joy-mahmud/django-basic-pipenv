@@ -46,6 +46,7 @@ def testing(request):
             )
         author_books=[]    
         for author in Author.objects.all():
+            #books=author.books.all()
             books=Book.objects.filter(author_id=author.id)        
             booksOfAnAuthor=[]
             for book in books:
