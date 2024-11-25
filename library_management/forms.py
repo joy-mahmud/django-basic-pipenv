@@ -1,5 +1,5 @@
 from django import forms
-from .models import Profile
+from .models import Profile,Author
 class ProfileForm(forms.ModelForm):
     class Meta:
         model=Profile
@@ -10,3 +10,8 @@ class ProfileForm(forms.ModelForm):
             'website': forms.URLInput(attrs={'class': 'border-[1px] border-black'}),
             'birthDate': forms.DateInput(attrs={'class': 'border-[1px] border-black', 'type': 'date'}),
         }
+        
+class AddAuthorForm(forms.ModelForm):
+    class Meta:
+        model=Author
+        fields=['name','email']

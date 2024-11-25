@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.http import HttpResponse,JsonResponse
 from .models import Author,Book,Profile
-from .forms import ProfileForm
+from .forms import ProfileForm,AddAuthorForm
 from django.forms.models import model_to_dict
 # Create your views here.
 def home(request):
@@ -12,9 +12,30 @@ def home(request):
     
     return render(request,'home.html',context)
 
+def addAuthor(request): 
+    try:
+        if(request.method=='POST'):
+           authorForm=AddAuthorForm(request.POST)
+           if authorForm.is_valid():
+               authorForm.save()
+               return redirect('library_home')
+        else:
+            form = AddAuthorForm()
+            context={
+                "form":form
+            }
+            return render(request,'addAuthor.html',context)       
+               
+    except:
+       return HttpResponse('something went wrong')
+       
+               
 def addProfile(request,id):
     #author= Author.objects.get(id=id)
     author = get_object_or_404(Author, id=id)
+    profile=Profile.objects.filter(id=id)
+    if(profile):
+        return HttpResponse("This author already has a profile")
     
     if request.method=="POST":
         profileForm=ProfileForm(request.POST)

@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block title %}addAuthor{% endblock title %}
+{% block content %}
+<form action="" method="post">
+    {% csrf_token %}
+    {{form}}
+    <button type="submit">add</button>
+</form>
+
+{% endblock content %}
