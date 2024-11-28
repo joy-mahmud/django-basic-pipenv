@@ -6,7 +6,21 @@
 <div>
     <form action="" method="post">
         {% csrf_token %}
-        {{form}}
+        <div>
+            <label for="username">username</label>
+             <input type="text" name="username" id="" value="">
+        </div>
+        <div>
+            <label for="password1">password</label>
+            <input type="password" name="password1" id="" value="">
+        </div>
+       <div>
+        <label for="password2">confirm password</label>
+        <input type="password" name="password2" id="">
+       </div>
+    {% comment %} {{form}} {% endcomment %}
+
+
         <button type="submit">register</button>
     </form>
 </div>
