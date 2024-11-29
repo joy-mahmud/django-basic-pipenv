@@ -25,5 +25,6 @@ urlpatterns = [
     path('tasks/',include('todo_app.urls')),
     path('member/',include("member.urls")),
     path('library/',include("library_management.urls")),
-    path('accounts/',include('accounts.urls'))
+    path('accounts/',include('accounts.urls')),
+    path('person/',include('person.urls')),
 ]
