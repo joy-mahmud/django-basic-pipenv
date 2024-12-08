@@ -17,6 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from . import views
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path("",views.app_home),
@@ -27,4 +29,8 @@ urlpatterns = [
     path('library/',include("library_management.urls")),
     path('accounts/',include('accounts.urls')),
     path('person/',include('person.urls')),
+    path('',include('mediaUpload.urls'))
+  
 ]
+
+urlpatterns+=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
