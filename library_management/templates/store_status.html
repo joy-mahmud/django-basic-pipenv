@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>status</title>
+</head>
+<body>
+    <div>
+        {% comment %} <h1>Bookstore Status</h1>
+    <p><strong>Average Price of Books: ${{ average_price|floatformat:2 }}</strong></p>
+    <p><strong>Total Number of Books: {{ total_books }}</strong></p> {% endcomment %}
+        <ul>
+            {% for author in authors %}
+                <li>
+                    <strong>{{ author.name }}</strong><br>
+                    Total Books: {{ author.total_books }}<br>
+                    Average Book Price: ${{ author.average_book_price|floatformat:2 }}<br>
+                    <hr>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

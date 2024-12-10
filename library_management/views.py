@@ -3,6 +3,7 @@ from django.http import HttpResponse,JsonResponse
 from .models import Author,Book,Profile
 from .forms import ProfileForm,AddAuthorForm
 from django.forms.models import model_to_dict
+from django.db.models import Avg, Count
 # Create your views here.
 def home(request):
     authors=Author.objects.all()
@@ -11,6 +12,17 @@ def home(request):
     }
     
     return render(request,'home.html',context)
+def view_status(request):
+    authors = Author.objects.annotate(
+    total_books=Count('books'),
+    average_book_price=Avg('books__price')
+    )
+    
+   
+    context={
+        "auhtors":authors
+    }
+    return render(request,'store_status.html',context)
 
 def addAuthor(request): 
     try:
@@ -142,7 +154,7 @@ def testing(request):
         
 
         return JsonResponse({"authors": authors, "books": books})
-    return testingThree()
+    #return testingThree()
 
     
     
