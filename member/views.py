@@ -145,6 +145,7 @@ def deleteMember(request,id):
     member.delete()
     return redirect('member_home')
          
+
     
          
          
